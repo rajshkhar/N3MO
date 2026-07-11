@@ -72,15 +72,7 @@ def get_candidate_file_paths(importer_file, module):
 def resolve_import_links(project_id):
     logger.info("🔗 Resolving Imports (Scope-Aware)...")
     conn = get_connection()
-    try:
-        with conn.cursor() as cur:
-            # 1. Fetch all symbols in the project
-            cur.execute(
-                "SELECT id, name, file_path, parent_id FROM symbols WHERE project_id = %s",
-                (project_id,)
-            )
-            symbols_rows = cur.fetchall()
-            
+    try:            
             # Map of (file_path, name) -> symbol_id
             symbols_map = {}
             for s_id, s_name, s_file, s_parent in symbols_rows:
