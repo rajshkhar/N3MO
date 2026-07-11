@@ -45,16 +45,6 @@ def is_test_or_mock_file(filename: str) -> bool:
                 return True
                 
     # 3. Check suffix: ends with one of the test terms preceded by a separator or uppercase boundary
-    for suffix in test_terms:
-        if name_without_ext_lower.endswith(suffix):
-            prefix_len = len(name_without_ext) - len(suffix)
-            if prefix_len <= 0:
-                return True
-            before_char = name_without_ext[prefix_len - 1]
-            if before_char in ("_", "-", ".") or name_without_ext[prefix_len].isupper():
-                return True
-                
-    return False
 
 def detect_language(filename: str) -> str | None:
     ext = os.path.splitext(filename)[1].lower()
